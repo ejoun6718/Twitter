@@ -20,6 +20,7 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var usernameLabel: UILabel!
   @IBOutlet weak var favoriteCountLabel: UILabel!
   @IBOutlet weak var favoriteButton: UIButton!
+  @IBOutlet weak var retweetButton: UIButton!
   
   var tweet: Tweet! {
     didSet {
@@ -30,16 +31,16 @@ class TweetCell: UITableViewCell {
       timestampLabel.text = tweet.createdAtString
       favoriteCountLabel.text = String(tweet.favoriteCount!)
       
-      // Debug statement
-      print(tweet.favorited!)
-      
       if tweet.favorited! {
         favoriteButton.isSelected = true
-        favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
-      }
-      else {
+      } else {
         favoriteButton.isSelected = false
-        favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: UIControlState.normal)
+      }
+      
+      if tweet.retweeted {
+        retweetButton.isSelected = true
+      } else {
+        retweetButton.isSelected = false
       }
       
       if let userProfileURL = self.tweet.user.profileImageURL{
@@ -75,6 +76,34 @@ class TweetCell: UITableViewCell {
     }
     refreshData()
   }
+  
+  @IBAction func onRetweet(_ sender: UIButton) {
+    tweet.retweeted = !tweet.retweeted
+    sender.isSelected = !sender.isSelected
+    
+    if tweet.retweeted {
+      tweet.retweetCount = tweet.retweetCount + 1
+      APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
+        if let  error = error {
+          print("Error retweeting tweet: \(error.localizedDescription)")
+        } else if let tweet = tweet {
+          print("Successfully retweeted the following Tweet: \n\(tweet.text)")
+        }
+      }
+    }
+    else {
+      tweet.retweetCount = tweet.retweetCount - 1
+      APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
+        if let  error = error {
+          print("Error unretweeting tweet: \(error.localizedDescription)")
+        } else if let tweet = tweet {
+          print("Successfully unretweeted the following Tweet: \n\(tweet.text)")
+        }
+      }
+    }
+    refreshData()
+  }
+  
   
   override func awakeFromNib() {
     super.awakeFromNib()
