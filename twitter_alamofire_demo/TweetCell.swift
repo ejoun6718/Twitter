@@ -30,6 +30,9 @@ class TweetCell: UITableViewCell {
       timestampLabel.text = tweet.createdAtString
       favoriteCountLabel.text = String(tweet.favoriteCount!)
       
+      // Debug statement
+      print(tweet.favorited!)
+      
       if tweet.favorited! {
         favoriteButton.isSelected = true
         favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
@@ -49,7 +52,7 @@ class TweetCell: UITableViewCell {
   @IBAction func onFavorite(_ sender: UIButton) {
     tweet.favorited = !tweet.favorited!
     sender.isSelected = !sender.isSelected
-    
+
     if tweet.favorited! {
       tweet.favoriteCount = tweet.favoriteCount! + 1
       APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
