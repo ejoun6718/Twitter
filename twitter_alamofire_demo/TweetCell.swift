@@ -32,9 +32,11 @@ class TweetCell: UITableViewCell {
       
       if tweet.favorited! {
         favoriteButton.isSelected = true
+        favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
       }
       else {
         favoriteButton.isSelected = false
+        favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: UIControlState.normal)
       }
       
       if let userProfileURL = self.tweet.user.profileImageURL{

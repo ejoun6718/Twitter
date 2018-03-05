@@ -28,7 +28,7 @@ class APIManager: SessionManager {
     User.current = nil
     
     // 2. Deauthorize OAuth tokens
-    //clearCredentials()
+    APIManager.shared.clearCredentials()
     
     // 3. Post logout notification
     NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
