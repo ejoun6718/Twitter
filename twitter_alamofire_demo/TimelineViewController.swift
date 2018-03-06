@@ -12,7 +12,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   var tweets: [Tweet] = []
   
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableView: UITableView! {
+    didSet {
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 50
+    }
+  }
   @IBAction func onLogOut(_ sender: Any) {
     APIManager.logout()
   }
