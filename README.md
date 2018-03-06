@@ -38,7 +38,10 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
+Portrait Orientation:
 <img src='https://i.imgur.com/Z6g0k9P.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+Landscape Orientation:
 <img src='https://i.imgur.com/ox831md.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
