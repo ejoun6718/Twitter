@@ -118,5 +118,6 @@ class TweetCell: UITableViewCell {
   
   func refreshData() {
     favoriteCountLabel.text = String(tweet.favoriteCount!)
+    retweetCountLabel.text = String(tweet.retweetCount)
   }
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 class User {
-  //static var current: User?
   var dictionary: [String: Any]?
   private static var _current: User?
   
