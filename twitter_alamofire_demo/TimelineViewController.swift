@@ -90,4 +90,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
       refreshControl.endRefreshing()
     }
   }
+  
+  override func performSegue(withIdentifier identifier: String, sender: Any?) {
+    <#code#>
+  }
 }
