@@ -8,8 +8,8 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-  
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate {
+
   var tweets: [Tweet] = []
   
   @IBOutlet weak var tableView: UITableView! {
@@ -91,7 +91,24 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
   }
   
-  override func performSegue(withIdentifier identifier: String, sender: Any?) {
-    <#code#>
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let cell = sender as? UITableViewCell {
+      // Get the index path from the cell that was tapped
+      if let indexPath = tableView.indexPath(for: cell) {
+        let tweet = tweets[indexPath.row]
+        let detailViewController = segue.destination as! TweetDetailViewController
+        
+        // Pass on the data to the Detail ViewController
+        detailViewController.tweet = tweet
+      }
+    }
+    else {
+      let composeViewController = segue.destination as! ComposeViewController
+      composeViewController.delegate = self;
+    }
+  }
+  
+  func did(post: Tweet) {
+    //refreshControlAction(<#T##refreshControl: UIRefreshControl##UIRefreshControl#>)
   }
 }
