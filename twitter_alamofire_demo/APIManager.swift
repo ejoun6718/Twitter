@@ -183,16 +183,32 @@ class APIManager: SessionManager {
   // Compose a tweet
   func composeTweet(with text: String, completion: @escaping (Tweet?, Error?) -> ()) {
     let urlString = "https://api.twitter.com/1.1/statuses/update.json"
-    let parameters = ["name": User.current?.screenName, "status": text]
+    //let parameters = ["name": User.current?.screenName, "status": text]
+    let parameters = ["status": text]
+    
     request(urlString, method: .post, parameters: parameters, encoding: URLEncoding.queryString).validate().responseJSON { (response) in
       if response.result.isSuccess,
         let tweetDictionary = response.result.value as? [String: Any] {
+        //let tweet = Tweet(dictionary: tweetDictionary)
+        //completion(tweet, nil)
+        //let tweetDictionary = try! response.jsonObject() as! [String: Any]
         let tweet = Tweet(dictionary: tweetDictionary)
         completion(tweet, nil)
       } else {
         completion(nil, response.result.error)
+        //completion(nil, error.underlyingError)
       }
     }
+    
+    /*let urlString = "https://api.twitter.com/1.1/statuses/update.json"
+    let parameters = ["status": text]
+    oauthManager.client.post(urlString, parameters: parameters, headers: nil, body: nil, success: { (response: OAuthSwiftResponse) in
+      let tweetDictionary = try! response.jsonObject() as! [String: Any]
+      let tweet = Tweet(dictionary: tweetDictionary)
+      completion(tweet, nil)
+    }) { (error: OAuthSwiftError) in
+      completion(nil, error.underlyingError)
+    }*/
   }
   
   //--------------------------------------------------------------------------------//
