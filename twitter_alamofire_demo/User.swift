@@ -15,6 +15,9 @@ class User {
   var name: String
   var screenName: String?
   var profileImageURL: String?
+  var followersCount: Int?
+  var statusesCount: Int?
+  var followingCount: Int?
   
   init(dictionary: [String: Any]) {
     self.dictionary = dictionary
@@ -22,6 +25,9 @@ class User {
     name = dictionary["name"] as! String
     screenName = dictionary["screen_name"] as? String
     profileImageURL = dictionary["profile_image_url"] as? String
+    followersCount = dictionary["followers_count"] as? Int
+    followingCount = dictionary["friends_count"] as? Int
+    statusesCount = dictionary["statuses_count"] as? Int
   }
   
   static var current: User? {

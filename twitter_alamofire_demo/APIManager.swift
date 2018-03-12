@@ -195,11 +195,6 @@ class APIManager: SessionManager {
     }
   }
   
-  // MARK: TODO: Compose Tweet
-  
-  // MARK: TODO: Get User Timeline
-  
-  
   //--------------------------------------------------------------------------------//
   
   

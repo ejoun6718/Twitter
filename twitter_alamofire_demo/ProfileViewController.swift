@@ -18,36 +18,23 @@ class ProfileViewController: UIViewController {
   
   
   override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        /*tweetTextLabel.text = tweet.text
-        screennameLabel.text = "@" +  tweet.user.screenName!
-        usernameLabel.text =  tweet.user.name
-        retweetCountLabel.text = String(tweet.retweetCount)
-        timestampLabel.text = tweet.createdAtString
-        favoriteCountLabel.text = String(tweet.favoriteCount!)
+    super.viewDidLoad()
     
-        if tweet.favorited! {
-          favoriteButton.isSelected = true
-        } else {
-          favoriteButton.isSelected = false
-        }
+    // Do any additional setup after loading the view.
     
-        if tweet.retweeted {
-          retweetButton.isSelected = true
-        } else {
-          retweetButton.isSelected = false
-        }
-    
-        if let userProfileURL = self.tweet.user.profileImageURL{
-          let url = URL(string: userProfileURL)
-          profileImageView.af_setImage(withURL: url!)
-        }*/
+    let user = User.current
+    if let userProfileURL = user?.profileImageURL{
+      let url = URL(string: userProfileURL)
+      profileImageView.af_setImage(withURL: url!)
     }
+      
+    followerCountLabel.text = String(describing: (user?.followersCount)!)
+    tweetsCountLabel.text = String(describing: (user?.statusesCount)!)
+    followingCountLabel.text = String(describing: (user?.followingCount)!)
+  }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
 }
