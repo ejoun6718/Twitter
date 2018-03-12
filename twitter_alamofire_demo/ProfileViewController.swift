@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController {
     followerCountLabel.text = String(describing: (user?.followersCount)!)
     tweetsCountLabel.text = String(describing: (user?.statusesCount)!)
     followingCountLabel.text = String(describing: (user?.followingCount)!)
+    taglineLabel.text = String(describing: (user?.screenName)!)
   }
 
   override func didReceiveMemoryWarning() {

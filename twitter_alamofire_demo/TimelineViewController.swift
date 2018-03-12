@@ -11,7 +11,7 @@ import UIKit
 class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate {
 
   var tweets: [Tweet] = []
-  
+
   @IBOutlet weak var tableView: UITableView! {
     didSet {
       tableView.rowHeight = UITableViewAutomaticDimension
@@ -73,6 +73,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
   // Updates the tableView with the new data
   // Hides the RefreshControl
   func refreshControlAction(_ refreshControl: UIRefreshControl) {
+    refresh()
+      
+    // Tell the refreshControl to stop spinning
+    refreshControl.endRefreshing()
+  }
+  
+  func refresh() {
     APIManager.shared.getHomeTimeLine { (tweets, error) in
       if let tweets = tweets {
         self.tweets = tweets
@@ -80,14 +87,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
       } else if let error = error {
         print("Error getting home timeline: " + error.localizedDescription)
       }
-      
-      // ... Use the new data to update the data source ...
-      
-      // Reload the tableView now that there is new data
-      self.tableView.reloadData()
-      
-      // Tell the refreshControl to stop spinning
-      refreshControl.endRefreshing()
     }
   }
   
@@ -109,6 +108,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
   }
   
   func did(post: Tweet) {
-    //refreshControlAction(<#T##refreshControl: UIRefreshControl##UIRefreshControl#>)
+    refresh()
   }
 }
