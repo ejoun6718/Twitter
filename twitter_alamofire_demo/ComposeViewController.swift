@@ -23,8 +23,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
       if let error = error {
         print("Error composing Tweet: \(error.localizedDescription)")
       } else if let tweet = tweet {
-        self.delegate?.did(post: tweet)
         print("Compose Tweet Success!")
+        self.delegate?.did(post: tweet)
       }
     }
   }

@@ -22,7 +22,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     APIManager.logout()
   }
   
-  override func viewDidLoad() {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidLoad()
     
     tableView.dataSource = self
